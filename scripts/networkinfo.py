@@ -187,7 +187,10 @@ def get_external_ip():
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (output, unused_error) = proc.communicate()
     try:
-        return output
+        if len(output) < 255:
+            return output
+        else:
+            return ""
     except Exception:
         return ""
     
